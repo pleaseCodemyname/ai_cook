@@ -16,7 +16,12 @@ const App = () => {
     setError('');
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/recipes?ingredients=${encodeURIComponent(ingredients)}`
+        `http://192.168.132.56:5000/api/recipes?ingredients=${encodeURIComponent(ingredients)}`,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
       console.log("서버 응답:", response.data);
       setRecipes(response.data.recipes);
@@ -27,7 +32,6 @@ const App = () => {
       setLoading(false);
     }
   };
-  
 
   // 재료 입력 핸들러
   const handleIngredientsChange = (e: ChangeEvent<HTMLInputElement>) => {

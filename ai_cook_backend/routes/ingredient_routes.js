@@ -4,7 +4,7 @@ const path = require('path');
 const router = express.Router();
 
 // 레시피 추천 API
-router.get('/api/recipes', (req, res) => {
+router.get('/', (req, res) => {
   const ingredients = req.query.ingredients;
 
   if (!ingredients) {
@@ -23,7 +23,7 @@ router.get('/api/recipes', (req, res) => {
 
   pythonProcess.on('close', (code) => {
     try {
-      const recipe = JSON.parse(dataToSend);
+      const recipe = { title: "추천 레시피", instructions: dataToSend.trim() }; // 문자열로 받은 데이터를 JSON으로 감싸기
       res.json({ recipes: [recipe] });
     } catch (err) {
       console.error(`JSON 파싱 에러: ${err}`);
